@@ -1,0 +1,10 @@
+.pop-up__full-screen{
+    place-items: center;
+    border-radius: 10px;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, .15);
+    display: block;
+    box-sizing: border-box;
+    margin: auto;
+    padding: 0;
+    position: relative;
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Проект Mesto">
+  <meta name="keywords" content="места России, соцсеть">
+  <meta name="author" content="Sofya Kotina">
+  <title>Mesto Russia</title>
+</head>
+<body class="page">
+    <header class="header">
+        <img class="header__logo" src="../images/header__logo.svg" alt="Mesto Russia">
+    </header>
+    <main>
+        <section class="profile">
+            <div class="profile__main">
+                <img class="profile__avatar" src="../images/profile__image.jpg" alt="Аватар">
+                <div class="profile__info">
+                    <div class="profile__heading">
+                        <h1 class="profile__name">Жак-Ив Кусто</h1>
+                        <button class="profile__edit-button" type="button"></button>
+                    </div>
+                    <p class="profile__caption">Исследователь океана</p>
+                </div>
+            </div>
+            <button type="button" class="profile__add-button"></button>
+        </section>
+        <section class="elements">
+        </section>
+    </main>
+    <footer class="footer">
+        <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
+    </footer>
+    <section class="pop-up pop-up__edit">
+        <div class="pop-up__window">
+            <button type="button" class="pop-up__close-button pop-up__close-edit"></button>
+            <form class="pop-up__form edit" name="info" method="POST">
+                <h2 class="pop-up__title">Редактировать профиль</h2>
+                <fieldset class="pop-up__input-container">
+                    <input type="text" class="pop-up__input name" placeholder="Имя" id="name" name="name" required>
+                    <input type="text" class="pop-up__input caption" placeholder="О себе" id="caption" name="caption" required>
+                </fieldset>
+                <button type="submit" class="pop-up__button pop-up__button_inactive">Сохранить</button>
+            </form>
+        </div>
+    </section>
+    <section class="pop-up pop-up__add">
+        <div class="pop-up__window">
+            <button type="button" class="pop-up__close-button pop-up__close-add"></button>
+            <form class="pop-up__form" name="info" method="POST">
+                <h2 class="pop-up__title">Новое место</h2>
+                <fieldset class="pop-up__input-container">
+                    <input type="text" class="pop-up__input" placeholder="Название" id="title" name="name" required>
+                    <input type="text" class="pop-up__input" placeholder="Ссылка на картинку" id="link" name="caption" required>
+                </fieldset>
+                <button type="submit" class="pop-up__button">Сохранить</button>
+            </form>
+        </div>
+    </section>
+    <section class="pop-up pop-up__zoom">
+        <div class="pop-up__full-screen">
+            <button class="pop-up__close-button pop-up__close-zoom" type="button"></button>
+            <figure class="pop-up__zooming">
+              <img class="pop-up__image" src="" alt="">
+              <figcaption class="pop-up__caption"></figcaption>
+            </figure>
+        </div>
+    </section>
+    <template id="templateElement">
+        <article class="element">
+            <button type="button" class="element__trash"></button>
+            <img class="element__image">
+            <div class="element__caption">
+                <h2 class="element__text"></h2>
+                <button class="element__like" type="button" name="element__like-button"></button>
+            </div>
+        </article>
+    </template>
+</body>
+</html>

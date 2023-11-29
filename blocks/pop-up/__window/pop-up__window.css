@@ -1,0 +1,7 @@
+.pop-up__window {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    position: relative;
+    margin: 0px auto;
+}

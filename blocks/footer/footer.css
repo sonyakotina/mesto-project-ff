@@ -1,13 +1,14 @@
-@import url('./__copyright/footer__copyright.css');
-
 .footer {
-  font-family: 'Inter', Arial, sans-serif;
-  flex-shrink: 0;
-  padding: 30px 0 60px;
+    max-width: calc(100% - (200px*2));
+    margin: 0px auto;
+    padding-top: 67px;
+    padding-bottom: 60px;
 }
 
-@media screen and (max-width: 568px) {
-  .footer {
-    padding: 30px 0 36px;
-  }
+@media screen and (max-width: 1100px) {
+    .footer {
+        max-width: calc(100% - (19px*2));
+        padding-top: 48px;
+        padding-bottom: 36px;
+    }
 }
