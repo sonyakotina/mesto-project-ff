@@ -1,8 +1,8 @@
 //IMPORTS
-import '../src/index.css'; // добавьте импорт главного файла стилей
-import {createCard} from './components/card.js';
-import {openPopup, closePopup} from './components/modal.js';
-import {initialCards} from './components/cards.js';
+import '../index.css'; // добавьте импорт главного файла стилей
+import {createCard} from './card.js';
+import {openPopup, closePopup, closePopupByOverlayClick, closePopupByEsc} from './modal.js';
+import {initialCards} from './cards.js';
 
 //кнопки
 const openEditProfilePopupButton = document.querySelector('.profile__edit-button');
@@ -29,33 +29,14 @@ const jobInput = document.querySelector('.caption');
 const profileName = document.querySelector('.profile__name');
 const profileCaption = document.querySelector('.profile__caption');
 
-const titleCardInput = document.getElementById('title');
-const linkCardInput = document.getElementById('link');
+const titleCardInput = document.querySelector('.title');
+const linkCardInput = document.querySelector('.link');
 
 const cardsListContainer = document.querySelector('.elements');
 
-openEditProfilePopupButton.addEventListener('click', handleClickEditButton);
-closeEditProfilePopupButton.addEventListener('click', () => closePopup(editProfilePopup));
-
-// Закрытие попапа по клику на оверлэй
+// Закрытие на клик
 popupsArray.forEach((popup) => {
-  popup.addEventListener('click', (evt) => {
-    const isOverlayClicked = evt.target === evt.currentTarget;
-    const isCloseButtonClicked = evt.target.classList.contains('pop-up__close-button');
-    if (isOverlayClicked || isCloseButtonClicked) {
-      closePopup(evt.currentTarget);
-    }
-  })
-})
-
-// Закрытие попапа на esc
-document.addEventListener('keydown', function(evt) {
-  const activePopup = Array.from(popupsArray).find((popup) => {
-    return popup.classList.contains('pop-up_opened');
-  })
-  if (evt.key === 'Escape') {
-    closePopup(activePopup);
-  }
+  closePopupByOverlayClick(popup);
 });
 
 // При клике на кнопку отрытия модального окна Профиля
@@ -74,23 +55,17 @@ function handleSubmitEditProfileForm(evt) {
   jobInput.value = "";
   closePopup(editProfilePopup);
 }
-editProfileForm.addEventListener('submit', handleSubmitEditProfileForm);
 
 //add
 function handleSubmitAddForm(event) {
-  event.preventDefault()
-  const newCard = createCard(titleCardInput.value, linkCardInput.value)
-  renderCard(newCard)
+  event.preventDefault();
+  const newCard = createCard(titleCardInput.value, linkCardInput.value);
+  renderCard(newCard);
 
   titleCardInput.value = "";
   linkCardInput.value = "";
-  closePopup(addCardPopup)
+  closePopup(addCardPopup);
 }
-openAddCardPopupButton.addEventListener('click', () => openPopup(addCardPopup));
-closeAddCardPopupButton.addEventListener('click', () => closePopup(addCardPopup));
-addCardPopup.addEventListener('submit', handleSubmitAddForm);  
-
-closePreviewImagePopupButton.addEventListener('click', () => closePopup(previewImagePopup));
 
 // Отрисовка карточки
 function renderCard(cardElement) {
@@ -102,3 +77,14 @@ initialCards.reverse().forEach((card) => {
   const newCard = createCard(card.name, card.link);
   renderCard(newCard);
 });
+
+openEditProfilePopupButton.addEventListener('click', handleClickEditButton);
+closeEditProfilePopupButton.addEventListener('click', () => closePopup(editProfilePopup));
+
+editProfileForm.addEventListener('submit', handleSubmitEditProfileForm);
+
+openAddCardPopupButton.addEventListener('click', () => openPopup(addCardPopup));
+closeAddCardPopupButton.addEventListener('click', () => closePopup(addCardPopup));
+addCardPopup.addEventListener('submit', handleSubmitAddForm);  
+
+closePreviewImagePopupButton.addEventListener('click', () => closePopup(previewImagePopup));
