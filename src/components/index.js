@@ -1,19 +1,13 @@
 //IMPORTS
 import '../index.css'; // добавьте импорт главного файла стилей
-import {createCard} from './card.js';
+import {createCard, deleteCard, likeCard, handleCardCLick} from './card.js';
 import {openPopup, closePopup, closePopupByOverlayClick, closePopupByEsc} from './modal.js';
 import {initialCards} from './cards.js';
 
 //кнопки
 const openEditProfilePopupButton = document.querySelector('.profile__edit-button');
-const closeEditProfilePopupButton = document.querySelector('.pop-up__close-edit');
 
 const openAddCardPopupButton = document.querySelector('.profile__add-button');
-const closeAddCardPopupButton = document.querySelector('.pop-up__close-add');
-
-const closePreviewImagePopupButton = document.querySelector('.pop-up__close-zoom');
-
-const popupOverlay = document.querySelector('.pop-up');
 
 //попапы
 const editProfilePopup = document.querySelector('.pop-up__edit');
@@ -59,7 +53,7 @@ function handleSubmitEditProfileForm(evt) {
 //add
 function handleSubmitAddForm(event) {
   event.preventDefault();
-  const newCard = createCard(titleCardInput.value, linkCardInput.value);
+  const newCard = createCard({name: titleCardInput.value, link: linkCardInput.value}, deleteCard, likeCard, handleCardCLick);
   renderCard(newCard);
 
   titleCardInput.value = "";
@@ -74,17 +68,13 @@ function renderCard(cardElement) {
 
 // Отрисовка начальных карточек
 initialCards.reverse().forEach((card) => {
-  const newCard = createCard(card.name, card.link);
+  const newCard = createCard(card, deleteCard, likeCard, handleCardCLick);
   renderCard(newCard);
 });
 
 openEditProfilePopupButton.addEventListener('click', handleClickEditButton);
-closeEditProfilePopupButton.addEventListener('click', () => closePopup(editProfilePopup));
 
 editProfileForm.addEventListener('submit', handleSubmitEditProfileForm);
 
 openAddCardPopupButton.addEventListener('click', () => openPopup(addCardPopup));
-closeAddCardPopupButton.addEventListener('click', () => closePopup(addCardPopup));
 addCardPopup.addEventListener('submit', handleSubmitAddForm);  
-
-closePreviewImagePopupButton.addEventListener('click', () => closePopup(previewImagePopup));
